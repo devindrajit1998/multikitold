@@ -78,7 +78,22 @@ export default function SearchBar() {
           </section>
         </>
       ) : (
-        <></>
+        <>
+          {/* <section className="mb-4 search_sugg">
+            <div className="custom-container">
+              <div className="title mb-10">
+                <h4>Suggestions</h4>
+              </div>
+              <ul className="search-suggestion-list">
+                <li>
+                  <a href="#" className="search-box">
+                    <h5 className="clamped_1">No result found!</h5>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section> */}
+        </>
       )}
       {/* Search Section End */}
     </>
