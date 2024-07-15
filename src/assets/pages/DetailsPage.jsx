@@ -2,8 +2,13 @@ import React, { useEffect } from "react";
 import ThumbSlider from "../components/ThumbSlider";
 import ProductSlider from "../components/ProductSlider";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 export default function DetailsPage() {
+  const location = useLocation();
+
+  const { items } = location.state || {};
+  console.log("location: " + items);
   return (
     <>
       <section className="main-product-section">

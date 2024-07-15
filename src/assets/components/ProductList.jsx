@@ -1,8 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ProductList() {
   const products = useSelector((state) => state.productSlice.products);
+  const navigate = useNavigate();
+
+  const handleNavigate = (items) => {
+    navigate(`/details/${items?.attributes?.slug}`, {
+      state: {items},
+    });
+  };
 
   return (
     <>
@@ -14,8 +22,12 @@ export default function ProductList() {
               return (
                 <>
                   <li key={items?.id}>
-                    <div className="product-box">
-                      <a href="#" className="product-image">
+                    {/* <Link to="/details/slug">  */}
+                    <div
+                      className="product-box pointer"
+                      onClick={()=>handleNavigate(items)}
+                    >
+                      <div className="product-image">
                         <img
                           src={
                             items?.attributes?.thumbnail?.data?.attributes?.url
@@ -23,14 +35,12 @@ export default function ProductList() {
                           className="img-fluid"
                           alt
                         />
-                      </a>
+                      </div>
                       <div className="product-content">
                         <div>
-                          <a href="#">
-                            <h5 className="name clamped_1">
-                              {items?.attributes?.name}
-                            </h5>
-                          </a>
+                          <h5 className="name clamped_1">
+                            {items?.attributes?.name}
+                          </h5>
                           <h5 className="category">
                             {
                               items?.attributes?.category?.data?.attributes
@@ -39,10 +49,12 @@ export default function ProductList() {
                           </h5>
                           <h5 className="price">
                             ₹
-                            {(items?.attributes?.price -
+                            {(
+                              items?.attributes?.price -
                               (items?.attributes?.price *
                                 items?.attributes?.offer) /
-                                100).toFixed(0)}
+                                100
+                            ).toFixed(0)}
                           </h5>
                         </div>
                         <div>
@@ -63,6 +75,7 @@ export default function ProductList() {
                         </div>
                       </div>
                     </div>
+                    {/* </Link> */}
                   </li>
                 </>
               );
