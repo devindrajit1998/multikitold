@@ -12,7 +12,7 @@ export default function ThumbSlider(props) {
           return (
             <swiper-slide>
               <div className="main-product">
-                <img src={items?.attributes?.url} className="img-fluid" />
+                <img src={items?.attributes?.url} className="img-fluid w-100" />
               </div>
             </swiper-slide>
           );
