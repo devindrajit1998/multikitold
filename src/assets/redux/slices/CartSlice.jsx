@@ -18,14 +18,14 @@ export const CartSlice = createSlice({
     },
     addToCart: (state, action) => {
       const item = action.payload;
-      const existingItem = state.cartData.find(
+      const existingItem = state.cartData?.find(
         (currentItem) => currentItem.id === item.id
       );
 
       if (!existingItem) {
-        state.cartData.push({ ...item, inCart: 1 });
+        state.cartData?.push({ ...item, inCart: 1 });
       } else {
-        state.cartData = state.cartData.map((currentItem) =>
+        state.cartData = state.cartData?.map((currentItem) =>
           currentItem.id === item.id
             ? { ...currentItem, inCart: currentItem.inCart + 1 }
             : currentItem
@@ -36,7 +36,7 @@ export const CartSlice = createSlice({
     },
     removeSingleItem: (state, action) => {
       const itemId = action.payload;
-      const filterCart = state.cartData.filter((items) => items.id !== itemId);
+      const filterCart = state.cartData?.filter((items) => items.id !== itemId);
       state.cartData = filterCart;
       state.totalQuantity = state.cartData?.length;
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
