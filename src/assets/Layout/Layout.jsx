@@ -21,6 +21,8 @@ import {
   fetchCategoryData,
 } from "../redux/slices/commonSlice";
 import { priceCalculator, setProducts } from "../redux/slices/ProductSlice";
+import { updateCart } from "../redux/slices/CartSlice";
+import { getUserCart, setUserCart } from "../redux/slices/UserSlice";
 
 export default function Layout() {
   const [loading, setLoading] = useState(false);
@@ -28,11 +30,15 @@ export default function Layout() {
   const loginState = useSelector((state) => state.userSlice.loginStatus);
   const productState = useSelector((state) => state.productSlice.loading);
   const commonState = useSelector((state) => state.commonSlice.loading);
+  const cartChange = useSelector((state) => state.cartSlice.cartData);
+  const loggedUser = useSelector((state) => state.userSlice.user);
+  const getUserCartData = useSelector((state) => state.userSlice.cartItems);
+  const id = loggedUser?.id;
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location);
 
   useEffect(() => {
     if (
@@ -60,12 +66,22 @@ export default function Layout() {
       dispatch(fetchCategoryData());
       const getItem = JSON.parse(localStorage.getItem("products"));
       dispatch(setProducts(getItem));
+      const getCartData = JSON.parse(localStorage.getItem("cartData"));
+      dispatch(updateCart(getCartData));
+      dispatch(getUserCart(getCartData));
     }
   }, [loginState]);
 
-  // if (loading) {
-  //   return <StateLoader />;
-  // }
+  useEffect(() => {
+    const getCartData = JSON.parse(localStorage.getItem("cartData"));
+    dispatch(getUserCart(getCartData));
+    const cartItems = getCartData;
+    if (id) {
+      dispatch(setUserCart({ id, cartItems }));
+    }
+  }, [cartChange, loginState]);
+
+
 
   if (loginState === "inactive" || loginState === "loading") {
     return (

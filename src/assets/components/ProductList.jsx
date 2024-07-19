@@ -59,7 +59,7 @@ export default function ProductList() {
                           </h5>
                         </div>
                         <div>
-                          <div className="add-quantity btn">
+                          {/* <div className="add-quantity btn">
                             <span className="add-btn">
                               <i class="fa-sharp fa-light fa-plus" />
                             </span>
@@ -72,7 +72,7 @@ export default function ProductList() {
                               defaultValue={0}
                             />
                             <span className="count-increase">+</span>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>

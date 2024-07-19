@@ -3,9 +3,15 @@ import ThumbSlider from "../components/ThumbSlider";
 import ProductSlider from "../components/ProductSlider";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { addToCart } from "../redux/slices/CartSlice";
 
 export default function DetailsPage() {
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (items) => {
+    dispatch(addToCart(items));
+  };
 
   const items = location?.state?.items || {};
 
@@ -17,7 +23,7 @@ export default function DetailsPage() {
         <div className="slider-box">
           <div className="custom-container">
             <div className="product-slider-box">
-              <ThumbSlider images={imageData}/>
+              <ThumbSlider images={imageData} />
             </div>
           </div>
         </div>
@@ -44,74 +50,25 @@ export default function DetailsPage() {
             <span>(150 Ratings)</span>
           </div>
           <h3>
-            $25.00 <del>$45.00</del>
+            ₹
+            {(
+              items?.attributes?.price -
+              items?.attributes?.price * items?.attributes?.offer * 0.01
+            ).toFixed(0)}
+            <del>₹{items?.attributes?.price}</del>
           </h3>
-          <button class="btn grocery-btn theme-btn mt-4">Shop Now</button>
+          <p className="offer-tag">{items?.attributes?.offer}% Off</p>
+          <button
+            class="btn grocery-btn theme-btn mt-4"
+            onClick={()=>handleAddToCart(items)}
+          >
+            ADD TO CART
+          </button>
         </div>
       </section>
 
       <section className="section-t-space-3">
         <div className="custom-container">
-          {/* <ul className="dropdown-list-box">
-            <li>
-              <div className="dropdown dropdown-box">
-                <button
-                  className="btn dropdown-button dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  500 g / $24.00
-                </button>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      250 g / $19.25
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      750 g / $29.55
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      1 kg / $50.36
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div className="dropdown dropdown-box">
-                <button
-                  className="btn dropdown-button dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Delivery Time
-                </button>
-                <ul className="dropdown-menu" style={{}}>
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      Monday Morning
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      Today 06:00 PM
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#!">
-                      Tomorrow 11:00 AM
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul> */}
           <div className="description-box">
             <div className="title">
               <h4>Description</h4>
@@ -141,13 +98,16 @@ export default function DetailsPage() {
                       Name : {items?.attributes?.brand?.data?.attributes?.name}
                     </p>
                     <p>
-                      Address : {items?.attributes?.brand?.data?.attributes?.address}
+                      Address :{" "}
+                      {items?.attributes?.brand?.data?.attributes?.address}
                     </p>
                     <p>
-                      Contact : {items?.attributes?.brand?.data?.attributes?.email}
+                      Contact :{" "}
+                      {items?.attributes?.brand?.data?.attributes?.email}
                     </p>
                     <p>
-                      Website : <Link
+                      Website :{" "}
+                      <Link
                         to={items?.attributes?.brand?.data?.attributes?.website}
                       >
                         {items?.attributes?.brand?.data?.attributes?.website}

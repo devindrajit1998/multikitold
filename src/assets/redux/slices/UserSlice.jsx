@@ -73,10 +73,9 @@ export const fetchUser = createAsyncThunk("fetchUser", async (id) => {
 
 // functions for uploading user avatar
 
-
 export const uploadAvatarAsync = createAsyncThunk(
   "uploadAvatarAsync",
-  async ({formData,userId}) => {
+  async ({ formData, userId }) => {
     try {
       const response = await axios.post(`${BASE_URL}${UPLOAD_IMG}`, formData, {
         headers: {
@@ -114,6 +113,30 @@ export const uploadAvatarAsync = createAsyncThunk(
   }
 );
 
+// function for setting cart data to user account
+
+export const setUserCart = createAsyncThunk(
+  "setUserCart",
+  async ({ id, cartItems }) => {
+    const cartData = { order: cartItems };
+    console.log("Setting user", cartData);
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/api/users/${id}`,
+        cartData,
+        {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      throw new Error();
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "userSlice",
   initialState,
@@ -129,6 +152,9 @@ export const userSlice = createSlice({
       state.user = [];
       state.token = [];
       sessionStorage.removeItem("session");
+    },
+    getUserCart: (state, action) => {
+      state.cartItems = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -159,6 +185,15 @@ export const userSlice = createSlice({
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.user = action.payload;
     });
+    builder.addCase(uploadAvatarAsync.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
+    builder.addCase(setUserCart.fulfilled, (state, action) => {
+      console.log("Cart set successfully");
+    });
+    builder.addCase(setUserCart.rejected, (state, action) => {
+      console.error(action.error);
+    });
   },
 });
 
@@ -166,4 +201,5 @@ export const userSlice = createSlice({
 
 export const { actions } = userSlice;
 export default userSlice.reducer;
-export const { setLoginStatus, setToken, logout } = userSlice.actions;
+export const { setLoginStatus, setToken, logout, getUserCart } =
+  userSlice.actions;

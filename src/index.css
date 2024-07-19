@@ -132,8 +132,121 @@
 .main-product-section .slider-box {
   padding: 20px 5px;
 }
+
 /* 
 .swiper-slide-visible.swiper-slide-fully-visible.swiper-slide-thumb-active {
   border: 3px solid rgba(var(--theme-color), 1);
   border-radius: 10px;
 } */
+
+.offer-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background-color: rgba(var(--theme-color), 1);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 3px;
+  text-transform: uppercase;
+  position: relative;
+  margin-top: 20px;
+}
+
+
+.offer-tag.large {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.offer-tag.small {
+  padding: 2px 5px;
+  font-size: 12px;
+}
+
+.offer-tag.sale {
+  background-color: #ff6f61;
+}
+
+.offer-tag.new {
+  background-color: #4caf50;
+}
+
+.mobile-box {
+  position: relative;
+}
+
+.mobile-box span {
+  position: absolute;
+  top: -5px;
+  right: -15px;
+  background-color: #fff;
+  color: rgba(var(--theme-color), 1);
+  font-size: 11px;
+  font-weight: 400;
+  border-radius: 100px;
+  width: 20px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-box-list li .cart-box .cart-left-box {
+  width: 50%;
+}
+
+.cart-box-list li .cart-box .cart-left-box {
+  display: -webkit-box;
+}
+
+.cart-box-list li .cart-box .cart-left-box .product-image {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Container Styles */
+.empty-cart-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 90%;
+  margin: auto;
+}
+
+/* Image Styles */
+.empty-cart-image {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Title Styles */
+.empty-cart-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Text Styles */
+.empty-cart-text {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Button Styles */
+.shop-now-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: rgba(var(--theme-color), 1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.shop-now-button:hover {
+  background-color: #3C8599;
+}

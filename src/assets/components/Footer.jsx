@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const cartQuantity = useSelector((state) => state.cartSlice.totalQuantity);
   return (
     <>
       <div className="mobile-style-6">
@@ -27,6 +29,7 @@ export default function Footer() {
           <li>
             <Link to="/cart" className="mobile-box">
               <i className="fa-thin fa-cart-shopping" />
+              {cartQuantity === 0 ? <></> : <span>{cartQuantity}</span>}
               <h6>Cart</h6>
             </Link>
           </li>
