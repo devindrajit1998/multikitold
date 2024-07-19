@@ -14,7 +14,7 @@ export const CartSlice = createSlice({
   reducers: {
     updateCart: (state, action) => {
       state.cartData = action.payload;
-      state.totalQuantity = state.cartData.length;
+      state.totalQuantity = state.cartData?.length;
     },
     addToCart: (state, action) => {
       const item = action.payload;
@@ -31,14 +31,14 @@ export const CartSlice = createSlice({
             : currentItem
         );
       }
-      state.totalQuantity = state.cartData.length;
+      state.totalQuantity = state.cartData?.length;
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
     },
     removeSingleItem: (state, action) => {
       const itemId = action.payload;
       const filterCart = state.cartData.filter((items) => items.id !== itemId);
       state.cartData = filterCart;
-      state.totalQuantity = state.cartData.length;
+      state.totalQuantity = state.cartData?.length;
       localStorage.setItem("cartData", JSON.stringify(state.cartData));
     },
   },
