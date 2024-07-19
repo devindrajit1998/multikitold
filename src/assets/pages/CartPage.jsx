@@ -12,7 +12,7 @@ export default function CartPage() {
   };
   return (
     <>
-      {cartData.length > 0 ? (
+      {cartData?.length > 0 ? (
         <>
           <section>
             <div className="custom-container">
