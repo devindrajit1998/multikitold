@@ -1,23 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 
 export default function ProductList() {
-  const products = useSelector((state) => state.productSlice.products);
+  const product = useSelector((state) => state.productSlice.products);
   const navigate = useNavigate();
 
   const handleNavigate = (items) => {
     navigate(`/details/${items?.attributes?.slug}`, {
-      state: {items},
+      state: { items },
     });
   };
 
+  console.log(`ProductList`, product);
   return (
     <>
       <section className="section-t-space-4">
         <div className="custom-container">
           <ul className="product-offer-list">
-            {products?.data?.[0]?.attributes?.products?.data?.map((items) => {
+            {product?.data?.map((items) => {
               // products?.data[0]?.attributes?.products?.data
               return (
                 <>
@@ -25,7 +26,7 @@ export default function ProductList() {
                     {/* <Link to="/details/slug">  */}
                     <div
                       className="product-box pointer"
-                      onClick={()=>handleNavigate(items)}
+                      onClick={() => handleNavigate(items)}
                     >
                       <div className="product-image">
                         <img

@@ -63,9 +63,9 @@ export default function Layout() {
     }
   }, [loginState]);
 
-  if (loading) {
-    return <StateLoader />;
-  }
+  // if (loading) {
+  //   return <StateLoader />;
+  // }
 
   if (loginState === "inactive" || loginState === "loading") {
     return (
@@ -74,7 +74,7 @@ export default function Layout() {
           <Route path="/" element={<OnboardingPage />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="*" element={<ErrorPage />} />
+          {/* <Route path="*" element={<ErrorPage />} /> */}
         </Routes>
       </>
     );

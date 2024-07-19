@@ -57,7 +57,7 @@ export const productSlice = createSlice({
       })
       .addCase(getProductsByCategory.fulfilled, (state, action) => {
         state.loading = "idle";
-        state.products = action.payload;
+        state.products = action.payload?.data?.[0]?.attributes?.products;
       })
       .addCase(getProductsByCategory.rejected, (state, action) => {
         state.loading = "idle";

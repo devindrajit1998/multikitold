@@ -2,25 +2,27 @@ import React, { useEffect } from "react";
 import ThumbSlider from "../components/ThumbSlider";
 import ProductSlider from "../components/ProductSlider";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function DetailsPage() {
   const location = useLocation();
 
-  const { items } = location.state || {};
-  console.log("location: " + items);
+  const items = location?.state?.items || {};
+
+  const imageData = items?.attributes?.alter?.data;
+
   return (
     <>
       <section className="main-product-section">
         <div className="slider-box">
           <div className="custom-container">
             <div className="product-slider-box">
-              <ThumbSlider />
+              <ThumbSlider images={imageData}/>
             </div>
           </div>
         </div>
         <div className="product-container px-15">
-          <h4>Assorted Capsicum Combo - (Red, Yellow, Green)</h4>
+          <h4>{items?.attributes?.name}</h4>
           <div className="rating">
             <ul>
               <li>
@@ -113,11 +115,7 @@ export default function DetailsPage() {
           <div className="description-box">
             <div className="title">
               <h4>Description</h4>
-              <p>
-                Refillable, Reusable, High Quality Glass Roll on Bottles with
-                Silver cap For Essential Oil Blends DIY Perfume Cosmetics Beauty
-                Products Ideal
-              </p>
+              <p>{items?.attributes?.description}</p>
             </div>
             <div
               className="accordion accordion-style-1"
@@ -140,10 +138,20 @@ export default function DetailsPage() {
                 >
                   <div className="accordion-body">
                     <p>
-                      Every taste of Italian cuisine served with a grin is a
-                      celebration. One day at a time, our goal is to make you
-                      happy and provide you with a delicious supper. Why not
-                      adore it?
+                      Name : {items?.attributes?.brand?.data?.attributes?.name}
+                    </p>
+                    <p>
+                      Address : {items?.attributes?.brand?.data?.attributes?.address}
+                    </p>
+                    <p>
+                      Contact : {items?.attributes?.brand?.data?.attributes?.email}
+                    </p>
+                    <p>
+                      Website : <Link
+                        to={items?.attributes?.brand?.data?.attributes?.website}
+                      >
+                        {items?.attributes?.brand?.data?.attributes?.website}
+                      </Link>
                     </p>
                   </div>
                 </div>

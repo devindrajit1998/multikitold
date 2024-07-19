@@ -37,7 +37,7 @@ export default function App() {
   return (
     <>
       <BrowserRouter>
-        <Loader />
+        {/* <Loader /> */}
         <Layout />
       </BrowserRouter>
     </>
