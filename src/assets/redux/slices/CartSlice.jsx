@@ -23,7 +23,7 @@ export const CartSlice = createSlice({
       );
 
       if (!existingItem) {
-        state.cartData?.push({ ...item, inCart: 1 });
+        state.cartData.push({ ...item, inCart: 1 });
       } else {
         state.cartData = state.cartData?.map((currentItem) =>
           currentItem.id === item.id
